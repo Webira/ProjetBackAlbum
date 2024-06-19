@@ -10,6 +10,7 @@ public class AlbumContext : DbContext
 
     public DbSet<Photo> photos { get; set; }
     public DbSet<Tag> tags { get; set; }
+    public DbSet<Tag> posts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -20,24 +21,3 @@ public class AlbumContext : DbContext
     }
 }
 
-//////
-
-
-///////
-
-/*   public class UserContext : DbContext
-{
-
-   public UserContext(DbContextOptions<UserContext> options) : base(options)
-   {
-   }
-   public DbSet<User> tags { get; set; }
-
-   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-   {
-      if (!optionsBuilder.IsConfigured)
-      {
-         optionsBuilder.UseSqlServer("");
-      }
-   }
-}*/
