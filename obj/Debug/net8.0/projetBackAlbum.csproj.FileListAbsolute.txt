@@ -134,3 +134,4 @@ C:\IG\ASP.NET\projetBackAlbum\obj\Debug\net8.0\refint\projetBackAlbum.dll
 C:\IG\ASP.NET\projetBackAlbum\obj\Debug\net8.0\projetBackAlbum.pdb
 C:\IG\ASP.NET\projetBackAlbum\obj\Debug\net8.0\projetBackAlbum.genruntimeconfig.cache
 C:\IG\ASP.NET\projetBackAlbum\obj\Debug\net8.0\ref\projetBackAlbum.dll
+C:\IG\ASP.NET\projetBackAlbum\obj\Debug\net8.0\projetBackAlbum.sourcelink.json

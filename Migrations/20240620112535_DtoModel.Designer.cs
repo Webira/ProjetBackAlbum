@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projetBackAlbum.Context;
 
@@ -11,9 +12,11 @@ using projetBackAlbum.Context;
 namespace projetBackAlbum.Migrations
 {
     [DbContext(typeof(AlbumContext))]
-    partial class AlbumContextModelSnapshot : ModelSnapshot
+    [Migration("20240620112535_DtoModel")]
+    partial class DtoModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,26 +27,26 @@ namespace projetBackAlbum.Migrations
 
             modelBuilder.Entity("TagUser", b =>
                 {
-                    b.Property<int>("TagsTagId")
+                    b.Property<int>("TagsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersUserId")
+                    b.Property<int>("UsersId")
                         .HasColumnType("int");
 
-                    b.HasKey("TagsTagId", "UsersUserId");
+                    b.HasKey("TagsId", "UsersId");
 
-                    b.HasIndex("UsersUserId");
+                    b.HasIndex("UsersId");
 
-                    b.ToTable("UserTags", (string)null);
+                    b.ToTable("TagUser");
                 });
 
             modelBuilder.Entity("projetBackAlbum.Models.Photo", b =>
                 {
-                    b.Property<int>("PhotoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PhotoId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
@@ -56,7 +59,7 @@ namespace projetBackAlbum.Migrations
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
 
-                    b.HasKey("PhotoId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PostId");
 
@@ -65,11 +68,11 @@ namespace projetBackAlbum.Migrations
 
             modelBuilder.Entity("projetBackAlbum.Models.Post", b =>
                 {
-                    b.Property<int>("PostId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -86,7 +89,7 @@ namespace projetBackAlbum.Migrations
                     b.Property<int?>("TagId")
                         .HasColumnType("int");
 
-                    b.HasKey("PostId");
+                    b.HasKey("Id");
 
                     b.HasIndex("TagId");
 
@@ -95,35 +98,35 @@ namespace projetBackAlbum.Migrations
 
             modelBuilder.Entity("projetBackAlbum.Models.Tag", b =>
                 {
-                    b.Property<int>("TagId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TagId");
+                    b.HasKey("Id");
 
                     b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("projetBackAlbum.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
@@ -132,13 +135,13 @@ namespace projetBackAlbum.Migrations
                 {
                     b.HasOne("projetBackAlbum.Models.Tag", null)
                         .WithMany()
-                        .HasForeignKey("TagsTagId")
+                        .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("projetBackAlbum.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("UsersUserId")
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -155,7 +158,7 @@ namespace projetBackAlbum.Migrations
             modelBuilder.Entity("projetBackAlbum.Models.Post", b =>
                 {
                     b.HasOne("projetBackAlbum.Models.Tag", "Tag")
-                        .WithMany("Posts")
+                        .WithMany()
                         .HasForeignKey("TagId");
 
                     b.Navigation("Tag");
@@ -164,11 +167,6 @@ namespace projetBackAlbum.Migrations
             modelBuilder.Entity("projetBackAlbum.Models.Post", b =>
                 {
                     b.Navigation("Photos");
-                });
-
-            modelBuilder.Entity("projetBackAlbum.Models.Tag", b =>
-                {
-                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("projetBackAlbum")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7e1c33ae15eda1ed5b4ba8c0b29702684eddb27")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a999297423951c07d366fcd69fbf7f3fa9e5a7e")]
 [assembly: System.Reflection.AssemblyProductAttribute("projetBackAlbum")]
 [assembly: System.Reflection.AssemblyTitleAttribute("projetBackAlbum")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

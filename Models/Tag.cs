@@ -1,15 +1,41 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace projetBackAlbum.Models;
 
-public class  Tag
-{
-    public int Id { get; set; }
-    public string Title { get; set; } = null!;
-    //public int IdUser { get; set; }
+using projetBackAlbum.DTO;
 
-    //public virtual User IdUserNavigation { get; set; } = null!;
-    
-public  Tag()
+public class Tag
 {
+    [Key]
+    public int TagId { get; set; }
 
-}
+    [Required]
+    public string Title { get; set; } = string.Empty;
+
+    //ManyToMany
+    public virtual ICollection<User> Users { get; set; } = new HashSet<User>();
+
+    //OneToMany
+    public virtual ICollection<Post> Posts { get; set; } = new HashSet<Post>();
+
+    //public Post Post { get; set; }
+
+    public Tag()
+    {
+        Users = new HashSet<User>();
+        Posts = new HashSet<Post>();
+    }
+
+    // ToDTO
+    public TagDTO ToTagDTO()
+    {
+        return new TagDTO
+        {
+            TagId = TagId,
+            Title = Title,
+            Users = Users.Select(user => user.ToUserDTO()).ToList(),
+            Posts = Posts.Select(post => post.ToPostDTO()).ToList()
+        };
+    }
 }

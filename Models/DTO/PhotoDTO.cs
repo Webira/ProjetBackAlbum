@@ -1,33 +1,38 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using projetBackAlbum.DTO;
 
-namespace projetBackAlbum.Models;
+using projetBackAlbum.Models;
+namespace projetBackAlbum.DTO;
 
-public class Photo
+public class PhotoDTO
 {
-    [Key]
     public int PhotoId { get; set; }
 
     public string Name { get; set; } = null!;
 
-    [Required]
     public string ImagePath { get; set; }
 
     public int? PostId { get; set; }
 
-    [ForeignKey("PostId")]
-    [JsonIgnore]
+   // [ForeignKey("PostId")]
+    //[JsonIgnore]
     public virtual Post? Post { get; set; } = null!;
 
-    public PhotoDTO ToPhotoDTO()
+    public PhotoDTO()
     {
-        return new PhotoDTO
+        //Photos = new HashSet<Photo>();
+    }
+
+    public Photo ToPhoto()
+    {
+        return new Photo
         {
             PhotoId = PhotoId,
             Name = Name,
             ImagePath = ImagePath
+
         };
     }
+
 }
